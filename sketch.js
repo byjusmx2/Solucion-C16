@@ -1,4 +1,4 @@
-//Game States
+//Estados del juego
 var PLAY=1;
 var END=0;
 var gameState=1;
@@ -26,17 +26,17 @@ function preload(){
 function setup() {
   createCanvas(600, 600);
   
-  //creating sword
+  //Creando espada
    knife=createSprite(40,200,20,20);
    knife.addImage(knifeImage);
    knife.scale=0.7
   
   
   
-  //set collider for sword
+  //Establecer colisionador para la espada
   knife.setCollider("rectangle",0,0,40,40);
 
-  // Score variables and Groups
+  // Puntuación de las variables y Grupos
   score=0;
   fruitGroup=createGroup();
   monsterGroup=createGroup();
@@ -48,15 +48,15 @@ function draw() {
   
   if(gameState===PLAY){
     
-    //Call fruits and Monster function
+    //Llamar a las frutas y la función Monstruo
     fruits();
     Monster();
     
-    // Move sword with mouse
+    // Mueve la espada con el mouse
     knife.y=World.mouseY;
     knife.x=World.mouseX;
   
-    // Increase score if sword touching fruit
+    // Aumentar la puntuación si la espada toca la fruta
     if(fruitGroup.isTouching(knife)){
       fruitGroup.destroyEach();
       
@@ -65,10 +65,10 @@ function draw() {
     }
     else
     {
-      // Go to end state if sword touching enemy
+      // Ir al estado End si la espada toca al enemigo
       if(monsterGroup.isTouching(knife)){
         gameState=END;
-        //gameover sound
+        //sonido de game over
         gameOverSound.play()
         
         fruitGroup.destroyEach();
@@ -76,7 +76,7 @@ function draw() {
         fruitGroup.setVelocityXEach(0);
         monsterGroup.setVelocityXEach(0);
         
-        // Change the animation of sword to gameover and reset its position
+        // Cambia la animación de la espada a gameover y restablece su posición
         knife.addImage(gameOverImage);
         knife.scale=2;
         knife.x=300;
@@ -86,9 +86,9 @@ function draw() {
   }
   
   drawSprites();
-  //Display score
+  //Mostrar la puntuación
   textSize(25);
-  text("Score : "+ score,250,50);
+  text("Puntuación : "+ score,250,50);
 }
 
 
@@ -109,7 +109,7 @@ function fruits(){
     position = Math.round(random(1,2));
     fruit=createSprite(400,200,20,20);
     console.log(position)
-     //using random variable change the position of fruit, to make it more challenging
+     //usando una variable aleatoria, cambia la posición de la fruta para hacerlo más desafiante
     
     if(position==1)
     {
@@ -121,7 +121,7 @@ function fruits(){
       if(position==2){
       fruit.x=0;
       
-  //Increase the velocity of fruit after score 4 or 10
+  //Aumentar la velocidad de la fruta después de la puntuación 4 o 10
       fruit.velocityX= (7+(score/4));
       }
     }
