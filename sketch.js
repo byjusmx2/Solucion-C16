@@ -26,14 +26,14 @@ function preload(){
 function setup() {
   createCanvas(600, 600);
   
-  //Creando espada
+  //Crear cuchillo
    knife=createSprite(40,200,20,20);
    knife.addImage(knifeImage);
    knife.scale=0.7
   
   
   
-  //Establecer colisionador para la espada
+  //Establecer colisionador para el cuchillo
   knife.setCollider("rectangle",0,0,40,40);
 
   // Puntuación de las variables y Grupos
@@ -52,11 +52,11 @@ function draw() {
     fruits();
     Monster();
     
-    // Mueve la espada con el mouse
+    // Mueve el cuchillo con el mouse
     knife.y=World.mouseY;
     knife.x=World.mouseX;
   
-    // Aumentar la puntuación si la espada toca la fruta
+    // Aumentar la puntuación si el cuchillo toca la fruta
     if(fruitGroup.isTouching(knife)){
       fruitGroup.destroyEach();
       
@@ -65,7 +65,7 @@ function draw() {
     }
     else
     {
-      // Ir al estado End si la espada toca al enemigo
+      // Ir al estado End si el cuchillo toca al enemigo
       if(monsterGroup.isTouching(knife)){
         gameState=END;
         //sonido de game over
@@ -76,7 +76,7 @@ function draw() {
         fruitGroup.setVelocityXEach(0);
         monsterGroup.setVelocityXEach(0);
         
-        // Cambia la animación de la espada a gameover y restablece su posición
+        // Cambiar la animación de la espada a gameover y restablece su posición
         knife.addImage(gameOverImage);
         knife.scale=2;
         knife.x=300;
